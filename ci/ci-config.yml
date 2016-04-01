@@ -1,0 +1,24 @@
+global:
+  qsname: qs_chefserver
+  qsenv: dev
+  reporting: true
+  regions:
+    - us-east-1
+    - us-west-1
+    - eu-west-1
+    - us-west-2
+    - sa-east-1
+    - eu-central-1
+    - ap-northeast-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ap-northeast-2
+  cis3bucket:  s3://quickstart-ci-bucket
+ 
+tests:
+  qs_chefservert1:
+    template_file: qs_chefserver-example1.template
+    parameter_input: qs_chefserver-exampleparms1.json
+  qs_chefservert2:
+    template_file: qs_chefserver-example2.template
+    parameter_input: qs_chefserver-exampleparms2.json
