@@ -17,8 +17,5 @@ global:
  
 tests:
   qs_chefservert1:
-    template_file: qs_chefserver-example1.template
-    parameter_input: qs_chefserver-exampleparms1.json
-  qs_chefservert2:
-    template_file: qs_chefserver-example2.template
-    parameter_input: qs_chefserver-exampleparms2.json
+    template_file: Chef-Server-QuickStart.template
+    parameter_input: Chef-Server-QuickStart.json

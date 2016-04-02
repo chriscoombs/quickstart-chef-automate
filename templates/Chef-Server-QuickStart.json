@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "tonynv"
+  }, 
+  {
+    "ParameterKey": "AdminPassword",
+    "ParameterValue": "newpassword"
+  }
+]
