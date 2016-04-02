@@ -20,6 +20,9 @@ echo "----------START-----------"
 echo "Timestamp: `date`"
 echo "Starting execution in ${EXEC_DIR}"
 
+# Allow sudo with out tty
+sed -i -e "s/Defaults    requiretty/Defaults    \!requiretty/" /etc/sudoers
+
 # GET PARMS
 get_yml_values() {
 local elementkey=$2
