@@ -53,20 +53,14 @@ else
 fi
 
 # Setup testing envrionement
-TESTDIR=ci_tests
-
-if [ -d $TESTDIR ] ; then
-   echo "Preserving existing test dir [$TESTDIR]"
-else
-   mkdir -p $TESTDIR/logs
-fi
 
 ### Main ####
-if [ -f `pwd`/test_cloudformation_stack.py ];then
+if [ -f test_cloudformation_stack.py ];then
         echo "Starting QSPython Test Framework"
         python test_cloudformation_stack.py
 else
         echo "Unable to start QSPython Test Framework file:test_cloudformation_stack.py [not found]"
+	pwd
 	exit 1
 fi
 
