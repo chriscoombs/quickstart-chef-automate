@@ -60,11 +60,12 @@ else
 fi
 
 ### Main ####
-if [ -f test_cloudformation_stack.py ];then
+if [ -f `pwd`/test_cloudformation_stack.py ];then
         echo "Starting QSPython Test Framework"
         python test_cloudformation_stack.py
 else
         echo "Unable to start QSPython Test Framework file:test_cloudformation_stack.py [not found]"
+	exit 1
 fi
 
 if [ -f $TESTDIR/${config_global_qsname}.html ]; then
