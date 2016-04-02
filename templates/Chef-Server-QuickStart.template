@@ -15,8 +15,7 @@
         "AdminPassword" : {
             "Description" : "Password for the 'chefadmin' account used to sign into the Chef Management Console",
             "Type"        : "String",
-            "Default"     : "Password123",
-			"NoEcho"         : "True"
+            "NoEcho"      : "True"
         },
         "AdminEmailAddress" : {
             "Description" : "Email address for Chef Administrator",
