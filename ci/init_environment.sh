@@ -15,7 +15,7 @@ else
     exit 1;
 fi
 
-cd /root/qs_*
+cd /root/qs_*/ci
 
 EXEC_DIR=`pwd`
 echo "----------START-----------"
