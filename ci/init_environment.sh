@@ -15,6 +15,8 @@ else
     exit 1;
 fi
 
+cd /root/qs_*
+
 EXEC_DIR=`pwd`
 echo "----------START-----------"
 echo "Timestamp: `date`"
@@ -39,6 +41,7 @@ awk -F$fs '{
    }'
 }
 
+
 # read yaml file
 CI_CONFIG=${EXEC_DIR}/ci-config.yml
 eval $(get_yml_values ${CI_CONFIG} "config_")
@@ -59,9 +62,10 @@ sudo yum install python-pip -y
 pip >/dev/null 
 if [ $? -eq 0 ];then
 echo "Check Python pip install correctly [installed]"
-sudo pip install -r requirements.txt
-chmod 755 test_cloudformation_stack.py
+sudo pip install -r ${EXEC_DIR}/requirements.txt
+chmod 755 ${EXEC_DIR}/test_cloudformation_stack.py
 else
 echo "Python pip install [failed]"
+exit 1
 fi
 
