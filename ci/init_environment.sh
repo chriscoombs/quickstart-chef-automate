@@ -40,7 +40,7 @@ awk -F$fs '{
 }
 
 # read yaml file
-CI_CONFIG=ci-config.yml
+CI_CONFIG=${EXEC_DIR}/ci-config.yml
 eval $(get_yml_values ${CI_CONFIG} "config_")
 
 aws s3 sync ../../$config_global_qsname $config_global_cis3bucket/$config_global_qsname   --exclude=.git/* --acl public-read
