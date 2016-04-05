@@ -2,7 +2,7 @@
 # author tonynv@amazon.com
 #
 
-VERSION=2.1
+VERSION=3.3
 # This script validates the cloudformation template then executes stack creation
 # Note: build server need to have aws cli install and configure with proper permissions
 
@@ -52,21 +52,24 @@ else
     exit 1;
 fi
 
-# Setup testing envrionement
-
 ### Main ####
 if [ -f test_cloudformation_stack.py ];then
         echo "Starting QSPython Test Framework"
         python test_cloudformation_stack.py
 else
         echo "Unable to start QSPython Test Framework file:test_cloudformation_stack.py [not found]"
-	pwd
 	exit 1
 fi
 
-if [ -f $TESTDIR/${config_global_qsname}.html ]; then
-	echo "Uploading report ${config_global_qsname}.html"
-	REPORTFILE=$TESTDIR/${config_global_qsname}.html
-	aws s3 cp $REPORTFILE s3://quickstart-ci-reports/
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+    exit 1
 fi
 
+if [ -f /root/${config_global_qsname}.html ]; then
+	echo "Uploading report ${config_global_qsname}.html"
+	REPORTFILE=/root//${config_global_qsname}.html
+	aws s3 cp $REPORTFILE s3://quickstart-ci-reports/
+fi
