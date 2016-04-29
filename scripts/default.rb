@@ -4,8 +4,6 @@
 #
 # Copyright 2015, AWS Quick Start
 #
-# All rights reserved - Do Not Redistribute
-#
 
 #Run apt-get update
 
