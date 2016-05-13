@@ -359,10 +359,10 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1"      : {
-                                "source" : "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source" : "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip"      : {
-                                "source" : "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source" : "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\downloads\\chefdk-0.9.0-1-x86.msi"      : {
                                 "source" : "https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/i386/chefdk-0.9.0-1-x86.msi"
@@ -377,7 +377,7 @@
                                 "source" : "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/default.rb"
                             },
 							"c:\\cfn\\scripts\\New-LocalAdministrator.ps1"      : {
-                                "source" : "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/New-LocalAdministrator.ps1"
+                                "source" : "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/scripts/New-LocalAdministrator.ps1"
                             },
 							"c:\\cfn\\downloads\\index.html"      : {
                                 "source" : "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/index.html"
