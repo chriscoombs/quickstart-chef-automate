@@ -1,6 +1,5 @@
 global:
-  qsname: qs_chefserver
-  qsenv: dev
+  qsname: quickstart-chef-chefserver
   reporting: true
   regions:
     - us-east-1
@@ -19,3 +18,5 @@ tests:
   qs_chefservert1:
     template_file: Chef-Server-QuickStart.template
     parameter_input: Chef-Server-QuickStart.json
+    regions:
+      - us-east-1
