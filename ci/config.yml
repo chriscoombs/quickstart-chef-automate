@@ -12,8 +12,7 @@ global:
     - ap-southeast-1
     - ap-southeast-2
     - ap-northeast-2
-  cis3bucket:  s3://quickstart-ci-bucket
- 
+
 tests:
   qs_chefservert1:
     template_file: Chef-Server-QuickStart.template
