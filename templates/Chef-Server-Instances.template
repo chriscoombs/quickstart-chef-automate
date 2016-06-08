@@ -150,9 +150,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        {
-                            "Ref": "ChefNodes"
-                        }
+                        "CHEF"
                     ]
                 },
                 "InstanceType": "t2.medium",
