@@ -28,7 +28,7 @@
                 "CHEF"
             ],
             "Type": "String",
-            "Default": "CHEF5"
+            "Default": "CHEF"
         },
         "RemoteAdminCIDR": {
             "Description": "CIDR Block or IP for SSH or RDP access",
