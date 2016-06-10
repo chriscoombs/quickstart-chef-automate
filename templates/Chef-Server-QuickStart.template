@@ -102,9 +102,6 @@
                     "AdminEmailAddress": {
                         "Ref": "AdminEmailAddress"
                     },
-                    "ChefNodes": {
-                        "Ref": "ChefNodes"
-                    },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
                     }
