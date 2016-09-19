@@ -31,10 +31,10 @@
             "Default": "CHEF"
         },
         "RemoteAdminCIDR": {
-            "Description": "CIDR Block or IP for SSH or RDP access",
-            "Type": "String",
-            "Default": "0.0.0.0/0",
-            "AllowedPattern": "[a-zA-Z0-9]+\\..+"
+            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
+            "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
+            "Description": "Allowed CIDR block for external SSH access Note: a value of 0.0.0.0/0 will allow access from ANY ip address",
+            "Type": "String"
         },
         "VPCCIDR": {
             "Description": "CIDR Block for the VPC",
