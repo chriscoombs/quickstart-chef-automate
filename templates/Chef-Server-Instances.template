@@ -17,7 +17,6 @@
         "RemoteAdminCIDR": {
             "Description": "CIDR Block or IP for SSH and RDP access",
             "Type": "String",
-            "Default": "0.0.0.0/0",
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
         },
         "AdminPassword": {

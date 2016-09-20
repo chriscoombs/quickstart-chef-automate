@@ -4,6 +4,10 @@
     "ParameterValue": "cikey"
   },
   {
+    "ParameterKey": "RemoteAdminCIDR",
+    "ParameterValue": "10.0.0.0/16"
+  },
+  {
     "ParameterKey": "AdminPassword",
     "ParameterValue": "newpassword"
   }
