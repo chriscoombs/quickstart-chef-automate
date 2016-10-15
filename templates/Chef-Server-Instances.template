@@ -185,7 +185,7 @@
                             "",
                             [
                                 "#!/bin/bash\n",
-                                "CHEFserver-ctl marketplace-setup -u chefadmin -f chefadmin -l p -e ",
+                                "chef-server-ctl marketplace-setup -u chefadmin -f chefadmin -l p -e ",
                                 {
                                     "Ref": "AdminEmailAddress"
                                 },
@@ -262,10 +262,10 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/microsoft-utilities/modules/AWSQuickStart.zip"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\downloads\\chefdk-0.9.0-1-x86.msi": {
                                 "source": "https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/i386/chefdk-0.9.0-1-x86.msi"
@@ -274,16 +274,16 @@
                                 "source": "https://github.com/git-for-windows/git/releases/download/v2.6.2.windows.1/Git-2.6.2-64-bit.exe"
                             },
                             "c:\\cfn\\scripts\\git.inf": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/scripts/git.inf"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/git.inf"
                             },
                             "c:\\cfn\\downloads\\default.rb": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/scripts/default.rb"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/default.rb"
                             },
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/microsoft-utilities/scripts/New-LocalAdministrator.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/microsoft-utilities/scripts/New-LocalAdministrator.ps1"
                             },
                             "c:\\cfn\\downloads\\index.html": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/CHEFserver/latest/scripts/index.html"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/index.html"
                             },
                             "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3066437-x64.msu": {
                                 "source": "https://download.microsoft.com/download/3/F/D/3FD04B49-26F9-4D9A-8C34-4533B9D5B020/Win8.1AndW2K12R2-KB3066437-x64.msu"
