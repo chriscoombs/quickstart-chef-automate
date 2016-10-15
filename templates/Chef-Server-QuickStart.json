@@ -9,6 +9,6 @@
   },
   {
     "ParameterKey": "AdminPassword",
-    "ParameterValue": "newpassword"
+    "ParameterValue": "$[alfred_genpass_12]"
   }
 ]
