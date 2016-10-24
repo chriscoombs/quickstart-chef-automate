@@ -286,8 +286,8 @@
                             "c:\\cfn\\downloads\\index.html": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/scripts/index.html"
                             },
-                            "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3066437-x64.msu": {
-                                "source": "https://download.microsoft.com/download/3/F/D/3FD04B49-26F9-4D9A-8C34-4533B9D5B020/Win8.1AndW2K12R2-KB3066437-x64.msu"
+                            "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3134758-x64.msu": {
+                                "source": "https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win8.1AndW2K12R2-KB3134758-x64.msu"
                             },
                             "c:/tools/ewmp.cmd": {
                                 "content": "@ECHO OFF\nFOR /F \"tokens=3,*\" %%a IN ('REG QUERY \"HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\Environment\" /v PATH') DO PATH %%a%%b\n%*"
@@ -315,7 +315,7 @@
                                 "waitAfterCompletion": "0"
                             },
                             "f-install-wmf5": {
-                                "command": "wusa.exe c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3066437-x64.msu /quiet /forcerestart",
+                                "command": "wusa.exe c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3134758-x64.msu /quiet /forcerestart",
                                 "waitAfterCompletion": "forever"
                             },
                             "g-install-chocolatey": {
