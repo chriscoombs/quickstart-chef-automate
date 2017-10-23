@@ -67,53 +67,53 @@
         "AWSAMIRegionMap": {
             "AMI": {
                 "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20170811",
-                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2017.09.13",
+                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2017.10.13",
                 "CHEF": "public_aio_flexible_2016_09_12_16_32_47-e5be03d6-c6dd-4a77-ae5a-7895d845c720-ami-f8aedeef.3"
             },
             "ap-northeast-1": {
                 "US1404HVM": "ami-d214e0b4",
-                "WS2012R2": "ami-ca5b99ac"
+                "WS2012R2": "ami-4d34eb2b"
             },
             "ap-northeast-2": {
                 "US1404HVM": "ami-b66ab3d8",
-                "WS2012R2": "ami-1c07dc72"
+                "WS2012R2": "ami-82fe5bec"
             },
             "ap-southeast-1": {
                 "US1404HVM": "ami-6828b30b",
-                "WS2012R2": "ami-440b7e27"
+                "WS2012R2": "ami-0e13686d"
             },
             "ap-southeast-2": {
                 "CHEF": "ami-9f1121fc",
                 "US1404HVM": "ami-941901f7",
-                "WS2012R2": "ami-ed33d48f"
+                "WS2012R2": "ami-2013f142"
             },
             "eu-central-1": {
                 "US1404HVM": "ami-b28f26dd",
-                "WS2012R2": "ami-9500b7fa"
+                "WS2012R2": "ami-e8843b87"
             },
             "eu-west-1": {
                 "CHEF": "ami-268df655",
                 "US1404HVM": "ami-2944b450",
-                "WS2012R2": "ami-4a18db33"
+                "WS2012R2": "ami-1ecc1e67"
             },
             "sa-east-1": {
                 "US1404HVM": "ami-e118698d",
-                "WS2012R2": "ami-e9344985"
+                "WS2012R2": "ami-5d512f31"
             },
             "us-east-1": {
                 "CHEF": "ami-cc5a23db",
                 "US1404HVM": "ami-835d69f8",
-                "WS2012R2": "ami-23d93c59"
+                "WS2012R2": "ami-f6529b8c"
             },
             "us-west-1": {
                 "CHEF": "ami-bce7a8dc",
                 "US1404HVM": "ami-399ab159",
-                "WS2012R2": "ami-794a7c19"
+                "WS2012R2": "ami-955c6ef5"
             },
             "us-west-2": {
                 "CHEF": "ami-408c5020",
                 "US1404HVM": "ami-253edd5d",
-                "WS2012R2": "ami-9d9360e5"
+                "WS2012R2": "ami-f318de8b"
             }
         }
     },
