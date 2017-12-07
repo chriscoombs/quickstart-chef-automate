@@ -1,14 +1,26 @@
 [
-  {
-    "ParameterKey": "KeyPairName",
-    "ParameterValue": "cikey"
-  },
-  {
-    "ParameterKey": "RemoteAdminCIDR",
-    "ParameterValue": "10.0.0.0/16"
-  },
-  {
-    "ParameterKey": "AdminPassword",
-    "ParameterValue": "$[alfred_genpass_12]"
-  }
+    {
+        "ParameterKey": "KeyPairName",
+        "ParameterValue": "cikey"
+    },
+    {
+        "ParameterKey": "QSS3BucketName",
+        "ParameterValue": "myawspublictest"
+    },
+    {
+        "ParameterKey": "QSS3KeyPrefix",
+        "ParameterValue": "chef/chef-server/latest/"
+    },
+    {
+        "ParameterKey": "RemoteAdminCIDR",
+        "ParameterValue": "0.0.0.0/0"
+    },
+    {
+        "ParameterKey": "RemoteAdminCIDR",
+        "ParameterValue": "R00tshell9"
+    },
+    {
+        "ParameterKey": "AdminPassword",
+        "ParameterValue": "$[taskcat_genpass_12]"
+    }
 ]
