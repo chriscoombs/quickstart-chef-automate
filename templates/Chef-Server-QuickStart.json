@@ -5,7 +5,7 @@
     },
     {
         "ParameterKey": "QSS3BucketName",
-        "ParameterValue": "myawspublictest"
+        "ParameterValue": "quickstart-reference"
     },
     {
         "ParameterKey": "QSS3KeyPrefix",
@@ -21,6 +21,6 @@
     },
     {
         "ParameterKey": "AdminPassword",
-        "ParameterValue": "$[taskcat_genpass_12]"
+        "ParameterValue": "$[alfred_genpass_12]"
     }
 ]
