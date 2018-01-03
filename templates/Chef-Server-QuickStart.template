@@ -18,10 +18,9 @@
                         "default": "Network Configuration"
                     },
                     "Parameters": [
-                        "VPC",
                         "VPCCIDR",
                         "SubnetId",
-                        "SubnetCIDR",
+                        "PublicSubnetCIDR",
                         "RemoteAdminCIDR"
                     ]
                 },
@@ -31,7 +30,7 @@
                     },
                     "Parameters": [
                         "KeyPairName",
-                        "ChefServerInstanceType",
+                        "ChefAutomateInstanceType",
                         "IncludeDemoInstances",
                         "ChefNodes",
                         "AdminPassword"                     
@@ -40,8 +39,8 @@
 
             ],
             "ParameterLabels": {
-                "ChefServerInstanceType": {
-                    "default": "Chef Server Instance Type"
+                "ChefAutomateInstanceType": {
+                    "default": "Chef Automate Instance Type"
                 },
                 "SubnetId": {
                     "default": "Public Subnet ID"
@@ -58,8 +57,8 @@
                 "RemoteAccessCIDR": {
                     "default": "Allowed External Access CIDR"
                 },
-                "SubnetCIDR": {
-                    "default": "Enter the CIDR for your subnet"
+                "PublicSubnetCIDR": {
+                    "default": "Enter the CIDR for your Public subnet"
                 },
                 "IncludeDemoInstances": {
                     "default": "Enable and Launch Demo Instances."
@@ -92,7 +91,7 @@
             "Description": "Public/private key pair",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
-        "SubnetCIDR": {
+        "PublicSubnetCIDR": {
             "Description": "CIDR Block for the Public Subnet",
             "Type": "String",
             "Default": "10.0.0.0/19",
@@ -105,13 +104,13 @@
         },
         "ChefNodes": {
             "Description": "Select the number of nodes you want to support.",
-            "AllowedValues": [
-                "CHEF"
-            ],
-            "Type": "String",
-            "Default": "CHEF"
+            "Default": 1,
+            "MinValue": 1,
+            "MaxValue": 10,
+            "Type": "Number",
+            "ConstraintDescription": "Must be a number between 1 and 10."
         },
-        "ChefServerInstanceType": {
+        "ChefAutomateInstanceType": {
             "Default": "t2.xlarge",
             "AllowedValues": [
                 "t2.xlarge",
@@ -142,7 +141,7 @@
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
         },
         "IncludeDemoInstances": {
-            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Server only, set to 'false'",
+            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Automate only, set to 'false'",
             "AllowedValues": [
                 "true",
                 "false"
@@ -183,8 +182,8 @@
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "SubnetCIDR": {
-                        "Ref": "SubnetCIDR"
+                    "PublicSubnetCIDR": {
+                        "Ref": "PublicSubnetCIDR"
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
@@ -218,6 +217,9 @@
                     },
                     "KeyPairName": {
                         "Ref": "KeyPairName"
+                    },
+                    "ChefNodes": {
+                        "Ref": "ChefNodes"
                     },
                     "SubnetId": {
                         "Fn::GetAtt": [

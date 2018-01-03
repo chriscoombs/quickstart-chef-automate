@@ -1,10 +1,5 @@
 #!/bin/bash -xe
 export PATH=$PATH:/usr/local/bin
-
-PROTOCOL='https://'
-FQDN=`grep 'fqdn' /tmp/chefautomate.txt | sed 's/fqdn://g'`
-TEMP_URL=${PROTOCOL}${FQDN}/data-collector/v0/
-ROOT_URL=`echo $TEMP_URL | sed 's/\"//gi' | sed 's/^h/\"h/gi' | sed 's/\/$/\/\"/gi'`
 OLDHOST=`curl http://169.254.169.254/latest/meta-data/public-hostname` 
 
 function update_chef_fqdn() {

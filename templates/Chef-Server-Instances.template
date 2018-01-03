@@ -21,6 +21,7 @@
                         "VPC",
                         "VPCCIDR",
                         "SubnetId",
+                        "PublicSubnetCIDR",
                         "RemoteAdminCIDR"
                     ]
                 },
@@ -30,7 +31,7 @@
                     },
                     "Parameters": [
                         "KeyPairName",
-                        "ChefServerInstanceType",
+                        "ChefAutomateInstanceType",
                         "IncludeDemoInstances",
                         "ChefNodes",
                         "AdminPassword"                    
@@ -39,11 +40,8 @@
 
             ],
             "ParameterLabels": {
-                "ChefServerInstanceType": {
-                    "default": "Chef Server Instance Type"
-                },
-                "AdminPassword": {
-                    "default": "Chef Administrator password."
+                "ChefAutomateInstanceType": {
+                    "default": "Chef Automate Instance Type"
                 },
                 "SubnetId": {
                     "default": "Public Subnet ID"
@@ -54,8 +52,14 @@
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
                 },
+                "AdminPassword": {
+                    "default": "Chef Administrator password."
+                },
                 "RemoteAccessCIDR": {
                     "default": "Allowed External Access CIDR"
+                },
+                "PublicSubnetCIDR": {
+                    "default": "Enter the CIDR for your Public subnet"
                 },
                 "IncludeDemoInstances": {
                     "default": "Enable and Launch Demo Instances."
@@ -88,6 +92,12 @@
             "Description": "Public/private key pair",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
+        "PublicSubnetCIDR": {
+            "Description": "CIDR Block for the Public Subnet",
+            "Type": "String",
+            "Default": "10.0.0.0/19",
+            "AllowedPattern": "[a-zA-Z0-9]+\\..+"
+        },
         "SubnetId": {
             "Description": "VPC Subnet ID for EC2 Instances",
             "Type": "AWS::EC2::Subnet::Id"
@@ -96,7 +106,7 @@
             "Description": "VPC Id",
             "Type": "AWS::EC2::VPC::Id"
         },
-        "ChefServerInstanceType": {
+        "ChefAutomateInstanceType": {
             "Default": "t2.xlarge",
             "AllowedValues": [
                 "t2.xlarge",
@@ -126,14 +136,14 @@
         },
         "ChefNodes": {
             "Description": "Select the number of nodes you want to support.",
-            "AllowedValues": [
-                "CHEF"
-            ],
-            "Type": "String",
-            "Default": "CHEF"
+            "Default": 1,
+            "MinValue": 1,
+            "MaxValue": 10,
+            "Type": "Number",
+            "ConstraintDescription": "Must be a number between 1 and 10."
         },
         "IncludeDemoInstances": {
-            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Server only, set to 'false'",
+            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Automate only, set to 'false'",
             "AllowedValues": [
                 "true",
                 "false"
@@ -251,21 +261,6 @@
                         "PolicyDocument": {
                             "Version": "2012-10-17",
                             "Statement": [
-                                 {
-                                     "Effect":"Allow",
-                                     "Action":[        
-                                           "cloudformation:*"
-                                     ],
-                                     "Resource": { "Fn::Sub": "arn:aws:cloudformation:us-west-2:${AWS::AccountId}:stack/*" }
-                                  }
-                               ]
-                             },
-                             "PolicyName": "aws-chef-temporary-cf-policy"
-                    },
-                    {
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
                                 {
                                     "Action": [
                                         "ec2:AssociateAddress",
@@ -340,9 +335,16 @@
                 ]
             }
         },
-        "ChefNode": {
-            "Type": "AWS::EC2::Instance",
+        "EC2Instances": {
+            "Type": "Custom::EC2Instances",
+            "Condition": "DemoInstances",
             "Properties": {
+                "ServiceToken": {
+                    "Fn::GetAtt": [
+                        "ChefNodeInstancesFunction",
+                        "Arn"
+                    ]
+                },
                 "ImageId": {
                     "Fn::FindInMap": [
                         "AWSAMIRegionMap",
@@ -353,23 +355,97 @@
                     ]
                 },
                 "InstanceType": "t2.medium",
+                "MinCount": { "Ref": "ChefNodes"},
+                "MaxCount": { "Ref": "ChefNodes"},
+                "SecurityGroupIds": [{
+                    "Fn::GetAtt" : [ "ChefNodeSecurityGroup", "GroupId" ]
+                }],
                 "SubnetId": {
                     "Ref": "SubnetId"
                 },
-                "Tags": [
+                "TagSpecifications": [
                     {
-                        "Key": "Name",
-                        "Value": "NODE"
+                      "ResourceType": "instance" ,
+                      "Tags": [
+                        {
+                          "Key": "Name",
+                          "Value": "Node"
+                        }
+                      ]
                     }
-                ],
-                "SecurityGroupIds": [
-                    {
-                        "Ref": "ChefNodeSecurityGroup"
-                    }
-                ],
+                  ],
                 "KeyName": {
                     "Ref": "KeyPairName"
                 }
+            }
+        },
+        "ChefNodeInstancesFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Condition": "DemoInstances",
+            "Properties": {
+                "Handler": "index.handler",
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LambdaExecutionRole",
+                        "Arn"
+                    ]
+                },
+                "Code": {
+                    "ZipFile": {
+                        "Fn::Sub": "var response = require('cfn-response');\nvar AWS = require('aws-sdk');\nexports.handler = function(event, context) {\n  var physicalId = event.PhysicalResourceId || 'none';\n  function success(data) {\n    return response.send(event, context, response.SUCCESS, data, physicalId);\n  }\n  function failed(e) {\n    return response.send(event, context, response.FAILED, e, physicalId);\n  }\n  var ec2 = new AWS.EC2();\n  var instances;\n  if (event.RequestType == 'Create') {\n    var launchParams = event.ResourceProperties;\n    delete launchParams.ServiceToken;\n    ec2.runInstances(launchParams).promise().then((data)=> {\n      instances = data.Instances.map((data)=> data.InstanceId);\n      physicalId = instances.join(':');\n      return ec2.waitFor('instanceRunning', {InstanceIds: instances}).promise();\n    }).then((data)=> success({Instances: instances})\n    ).catch((e)=> failed(e));\n  } else if (event.RequestType == 'Delete') {\n    if (physicalId == 'none') {return success({});}\n    var deleteParams = {InstanceIds: physicalId.split(':')};\n    ec2.terminateInstances(deleteParams).promise().then((data)=>\n      ec2.waitFor('instanceTerminated', deleteParams).promise()\n    ).then((data)=>success({})\n    ).catch((e)=>failed(e));\n  } else {\n    return failed({Error: \"In-place updates not supported.\"});\n  }\n};\n"
+                    }
+                },
+                "Runtime": "nodejs4.3",
+                "Timeout": 300
+            }
+        },
+        "LambdaExecutionRole": {
+            "Type": "AWS::IAM::Role",
+            "Condition": "DemoInstances",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                ],
+                "Policies": [
+                    {
+                        "PolicyName": "EC2Policy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "ec2:RunInstances",
+                                        "ec2:DescribeInstances",
+                                        "ec2:DescribeInstanceStatus",
+                                        "ec2:CreateTags",
+                                        "ec2:TerminateInstances"
+                                    ],
+                                    "Resource": [
+                                        "*"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "ChefServerSecurityGroup": {
@@ -405,6 +481,7 @@
         },
         "ChefWorkStationSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
+            "Condition": "DemoInstances",
             "Properties": {
                 "GroupDescription": "Enables RDP Access to the Chef WorkStation",
                 "VpcId": {
@@ -424,6 +501,7 @@
         },
         "ChefNodeSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
+            "Condition": "DemoInstances",
             "Properties": {
                 "GroupDescription": "Enables SSH and HTTP Access to the Chef Node",
                 "VpcId": {
@@ -510,7 +588,7 @@
                 "AWS::CloudFormation::Interface":{
                    "config": {
                        "files": {
-                         "/tmp/chefserver-bootstrap2.sh": {
+                         "/tmp/chefserver-bootstrap.sh": {
                             "source": {
                                 "Fn::Sub": [
                                     "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefserver-bootstrap.sh",
@@ -995,6 +1073,7 @@
             "Description": "Public DNS Name for the Chef Automate"
         },
         "ChefWorkStationDnsName": {
+            "Condition": "DemoInstances",
             "Value": {
                 "Fn::GetAtt": [
                     "ChefWorkStation",
