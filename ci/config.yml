@@ -19,3 +19,6 @@ tests:
     parameter_input: Chef-Server-QuickStart.json
     regions:
       - us-east-1
+      - us-west-1
+      - eu-west-1
+      - us-west-2

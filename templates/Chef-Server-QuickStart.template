@@ -1,12 +1,97 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "(0015) - Step 1 of 3: This template deploys the AWS Chef Server Quick Start. ***NOTE*** You must subscribe to the Chef Server AMI from the AWS Marketplace before you launch this template. See the deployment guide at http://aws.amazon.com/quickstart for details. This template creates Amazon EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
+    "Metadata": {
+        "AWS::CloudFormation::Interface": {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "AWS Quick Start Configuration"
+                    },
+                    "Parameters": [
+                        "QSS3BucketName",
+                        "QSS3KeyPrefix"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Network Configuration"
+                    },
+                    "Parameters": [
+                        "VPCCIDR",
+                        "SubnetId",
+                        "PublicSubnetCIDR",
+                        "RemoteAdminCIDR"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Chef Server Configuration"
+                    },
+                    "Parameters": [
+                        "KeyPairName",
+                        "ChefAutomateInstanceType",
+                        "IncludeDemoInstances",
+                        "ChefNodes",
+                        "AdminPassword"                     
+                    ]
+                }
+
+            ],
+            "ParameterLabels": {
+                "ChefAutomateInstanceType": {
+                    "default": "Chef Automate Instance Type"
+                },
+                "SubnetId": {
+                    "default": "Public Subnet ID"
+                },
+                "QSS3BucketName": {
+                    "default": "Quick Start S3 Bucket Name"
+                },
+                "QSS3KeyPrefix": {
+                    "default": "Quick Start S3 Key Prefix"
+                },
+                "AdminPassword": {
+                    "default": "Administrator password."
+                },
+                "RemoteAccessCIDR": {
+                    "default": "Allowed External Access CIDR"
+                },
+                "PublicSubnetCIDR": {
+                    "default": "Enter the CIDR for your Public subnet"
+                },
+                "IncludeDemoInstances": {
+                    "default": "Enable and Launch Demo Instances."
+                },
+                "VPCCIDR": {
+                    "default": "VPC CIDR"
+                },
+                "VPCID": {
+                    "default": "VPC ID"
+                }
+            }
+        }
+    },
     "Parameters": {
+        "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Default": "quickstart-reference",
+            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Type": "String"
+        },
+        "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Default": "chef/chef-server/latest/",
+            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Type": "String"
+        },
         "KeyPairName": {
             "Description": "Public/private key pair",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
-        "SubnetCIDR": {
+        "PublicSubnetCIDR": {
             "Description": "CIDR Block for the Public Subnet",
             "Type": "String",
             "Default": "10.0.0.0/19",
@@ -17,18 +102,31 @@
             "Type": "String",
             "NoEcho": "True"
         },
-        "AdminEmailAddress": {
-            "Description": "Email address for Chef Administrator",
-            "Type": "String",
-            "Default": "admin@localhost.internal"
-        },
         "ChefNodes": {
             "Description": "Select the number of nodes you want to support.",
+            "Default": 1,
+            "MinValue": 1,
+            "MaxValue": 10,
+            "Type": "Number",
+            "ConstraintDescription": "Must be a number between 1 and 10."
+        },
+        "ChefAutomateInstanceType": {
+            "Default": "t2.xlarge",
             "AllowedValues": [
-                "CHEF"
+                "t2.xlarge",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "m4.10xlarge",
+                "c4.large",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge"
             ],
-            "Type": "String",
-            "Default": "CHEF"
+            "ConstraintDescription": "Must contain valid instance type",
+            "Description": "Type of EC2 instance for the Master instances",
+            "Type": "String"
         },
         "RemoteAdminCIDR": {
             "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
@@ -43,7 +141,7 @@
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
         },
         "IncludeDemoInstances": {
-            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Server only, set to 'false'",
+            "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Automate only, set to 'false'",
             "AllowedValues": [
                 "true",
                 "false"
@@ -52,17 +150,40 @@
             "Default": "true"
         }
     },
+    "Conditions": {
+        "GovCloudCondition": {
+            "Fn::Equals": [
+                {
+                    "Ref": "AWS::Region"
+                },
+                "us-gov-west-1"
+            ]
+        }
+    },
     "Resources": {
         "VPCStack": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/templates/Chef-Server-VPC.template",
+                "TemplateURL": {
+                  "Fn::Sub": [
+                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Chef-Server-VPC.template",
+                      {
+                          "QSS3Region": {
+                              "Fn::If": [
+                                  "GovCloudCondition",
+                                  "s3-us-gov-west-1",
+                                  "s3"
+                              ]
+                          }
+                      }
+                  ]
+                },
                 "Parameters": {
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "SubnetCIDR": {
-                        "Ref": "SubnetCIDR"
+                    "PublicSubnetCIDR": {
+                        "Ref": "PublicSubnetCIDR"
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
@@ -73,16 +194,41 @@
         "InstanceStack": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3.amazonaws.com/quickstart-reference/chef/chef-server/latest/templates/Chef-Server-Instances.template",
+                "TemplateURL": {
+                    "Fn::Sub": [
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Chef-Server-Instances.template",
+                        {
+                            "QSS3Region": {
+                                "Fn::If": [
+                                    "GovCloudCondition",
+                                    "s3-us-gov-west-1",
+                                    "s3"
+                                ]
+                            }
+                        }
+                    ]
+                },
                 "Parameters": {
+                    "QSS3BucketName": {
+                        "Ref": "QSS3BucketName"
+                    },
+                    "QSS3KeyPrefix": {
+                        "Ref": "QSS3KeyPrefix"
+                    },
                     "KeyPairName": {
                         "Ref": "KeyPairName"
+                    },
+                    "ChefNodes": {
+                        "Ref": "ChefNodes"
                     },
                     "SubnetId": {
                         "Fn::GetAtt": [
                             "VPCStack",
                             "Outputs.SubnetId"
                         ]
+                    },
+                    "AdminPassword": {
+                        "Ref": "AdminPassword"
                     },
                     "VPC": {
                         "Fn::GetAtt": [
@@ -95,12 +241,6 @@
                     },
                     "RemoteAdminCIDR": {
                         "Ref": "RemoteAdminCIDR"
-                    },
-                    "AdminPassword": {
-                        "Ref": "AdminPassword"
-                    },
-                    "AdminEmailAddress": {
-                        "Ref": "AdminEmailAddress"
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"

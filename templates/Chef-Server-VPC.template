@@ -6,7 +6,7 @@
             "Description": "Public/private key pair",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
-        "SubnetCIDR": {
+        "PublicSubnetCIDR": {
             "Description": "CIDR Block for the Public Subnet",
             "Type": "String",
             "Default": "10.0.0.0/19",
@@ -48,7 +48,7 @@
                     "Ref": "VPC"
                 },
                 "CidrBlock": {
-                    "Ref": "SubnetCIDR"
+                    "Ref": "PublicSubnetCIDR"
                 },
                 "MapPublicIpOnLaunch": "true",
                 "AvailabilityZone": {
