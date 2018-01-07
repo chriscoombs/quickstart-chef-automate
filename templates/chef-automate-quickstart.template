@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "(0015) - Step 1 of 3: This template deploys the AWS Chef Server Quick Start. ***NOTE*** You must subscribe to the Chef Server AMI from the AWS Marketplace before you launch this template. See the deployment guide at http://aws.amazon.com/quickstart for details. This template creates Amazon EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
+    "Description": "(0015) - Step 1 of 3: This template deploys the AWS Chef Automate Quick Start. ***NOTE*** You must subscribe to the Chef Automate AMI from the AWS Marketplace before you launch this template. See the deployment guide at http://aws.amazon.com/quickstart for details. This template creates Amazon EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -26,7 +26,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Chef Server Configuration"
+                        "default": "Chef Automate Configuration"
                     },
                     "Parameters": [
                         "KeyPairName",
@@ -83,7 +83,7 @@
         "QSS3KeyPrefix": {
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "chef/chef-server/latest/",
+            "Default": "chef/automate/latest/",
             "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         },
@@ -166,7 +166,7 @@
             "Properties": {
                 "TemplateURL": {
                   "Fn::Sub": [
-                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Chef-Server-VPC.template",
+                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/chef-automate-vpc.template",
                       {
                           "QSS3Region": {
                               "Fn::If": [
@@ -196,7 +196,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Chef-Server-Instances.template",
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/chef-automate-instances.template",
                         {
                             "QSS3Region": {
                                 "Fn::If": [

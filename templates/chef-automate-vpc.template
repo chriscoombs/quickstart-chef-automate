@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Step 2 of 3: Create the VPC infrastructure for the Chef Server Quick Start.",
+    "Description": "Step 2 of 3: Create the VPC infrastructure for the Chef Automate Quick Start.",
     "Parameters": {
         "KeyPairName": {
             "Description": "Public/private key pair",

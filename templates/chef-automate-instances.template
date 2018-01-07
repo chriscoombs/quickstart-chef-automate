@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Step 3 of 3: Create the Amazon EC2 instances for the Chef Server Quick Start.",
+    "Description": "Step 3 of 3: Create the Amazon EC2 instances for the Chef Automate Quick Start.",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -27,7 +27,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Chef Server Configuration"
+                        "default": "Chef Automate Configuration"
                     },
                     "Parameters": [
                         "KeyPairName",
@@ -84,7 +84,7 @@
         "QSS3KeyPrefix": {
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "chef/chef-server/latest/",
+            "Default": "chef/automate/latest/",
             "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         },
@@ -448,10 +448,10 @@
                 ]
             }
         },
-        "ChefServerSecurityGroup": {
+        "ChefAutomateSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupDescription": "Enables SSH and HTTPS access to the Chef Server",
+                "GroupDescription": "Enables SSH and HTTPS access to the Chef Automate",
                 "VpcId": {
                     "Ref": "VPC"
                 },
@@ -588,10 +588,10 @@
                 "AWS::CloudFormation::Interface":{
                    "config": {
                        "files": {
-                         "/tmp/chefserver-bootstrap.sh": {
+                         "/tmp/chefautomate-bootstrap.sh": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefserver-bootstrap.sh",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -647,7 +647,7 @@
                 },
                 "SecurityGroupIds": [
                     {
-                        "Ref": "ChefServerSecurityGroup"
+                        "Ref": "ChefAutomateSecurityGroup"
                     }
                 ],
                 "KeyName": {
@@ -684,9 +684,9 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                { "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefserver-bootstrap.sh /tmp/chefserver-bootstrap.sh\n" },
-                                "chmod 755 /tmp/chefserver-bootstrap.sh\n",
-                                "/tmp/chefserver-bootstrap.sh\n",
+                                { "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh /tmp/chefautomate-bootstrap.sh\n" },
+                                "chmod 755 /tmp/chefautomate-bootstrap.sh\n",
+                                "/tmp/chefautomate-bootstrap.sh\n",
                                 "QSS3BucketName=\"",
                                 {
                                     "Ref": "QSS3BucketName"
@@ -796,7 +796,7 @@
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -813,7 +813,7 @@
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/modules/AWSQuickStart.zip",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -870,7 +870,7 @@
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/scripts/New-LocalAdministrator.ps1",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [

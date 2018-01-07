@@ -9,7 +9,7 @@
     },
     {
         "ParameterKey": "QSS3KeyPrefix",
-        "ParameterValue": "chef/chef-server/latest/"
+        "ParameterValue": "chef/automate/latest/"
     },
     {
         "ParameterKey": "RemoteAdminCIDR",
