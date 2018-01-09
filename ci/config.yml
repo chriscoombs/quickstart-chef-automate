@@ -1,5 +1,5 @@
 global:
-  qsname: quickstart-chef-chefserver
+  qsname: quickstart-chef-automate
   reporting: true
   regions:
     - us-east-1
@@ -15,8 +15,8 @@ global:
 
 tests:
   qs_chefservert1:
-    template_file: Chef-Server-QuickStart.template
-    parameter_input: Chef-Server-QuickStart.json
+    template_file: chef-automate-quickstart.template
+    parameter_input: chef-automate-quickstart.json
     regions:
       - us-east-1
       - us-west-1
