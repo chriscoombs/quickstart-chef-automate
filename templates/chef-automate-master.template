@@ -18,6 +18,7 @@
                         "default": "Network Configuration"
                     },
                     "Parameters": [
+                        "AvailabilityZones",
                         "VPCCIDR",
                         "SubnetId",
                         "PublicSubnetCIDR",
@@ -39,6 +40,9 @@
 
             ],
             "ParameterLabels": {
+                "AvailabilityZones": {
+                    "default": "Availability Zones"
+                },
                 "ChefAutomateInstanceType": {
                     "default": "Chef Automate Instance Type"
                 },
@@ -73,6 +77,10 @@
         }
     },
     "Parameters": {
+        "AvailabilityZones": {
+            "Description": "List of Availability Zones to use for the subnets in the VPC. Note: The logical order is preserved and only 2 AZs are used for this deployment.",
+            "Type": "List<AWS::EC2::AvailabilityZone::Name>"
+        },
         "QSS3BucketName": {
             "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
             "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
@@ -94,7 +102,7 @@
         "PublicSubnetCIDR": {
             "Description": "CIDR Block for the Public Subnet",
             "Type": "String",
-            "Default": "10.0.0.0/19",
+            "Default": "10.0.128.0/20",
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
         },
         "AdminPassword": {
@@ -166,7 +174,7 @@
             "Properties": {
                 "TemplateURL": {
                   "Fn::Sub": [
-                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/chef-automate-vpc.template",
+                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template",
                       {
                           "QSS3Region": {
                               "Fn::If": [
@@ -182,8 +190,16 @@
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "PublicSubnetCIDR": {
+                    "PublicSubnet1CIDR": {
                         "Ref": "PublicSubnetCIDR"
+                    },
+                    "AvailabilityZones": {
+                        "Fn::Join": [
+                            ",",
+                            {
+                                "Ref": "AvailabilityZones"
+                            }
+                        ]
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
@@ -224,7 +240,7 @@
                     "SubnetId": {
                         "Fn::GetAtt": [
                             "VPCStack",
-                            "Outputs.SubnetId"
+                            "Outputs.PublicSubnet1ID"
                         ]
                     },
                     "AdminPassword": {
@@ -233,7 +249,7 @@
                     "VPC": {
                         "Fn::GetAtt": [
                             "VPCStack",
-                            "Outputs.VPC"
+                            "Outputs.VPCID"
                         ]
                     },
                     "IncludeDemoInstances": {
@@ -243,7 +259,10 @@
                         "Ref": "RemoteAdminCIDR"
                     },
                     "VPCCIDR": {
-                        "Ref": "VPCCIDR"
+                        "Fn::GetAtt": [
+                            "VPCStack",
+                            "Outputs.VPCCIDR"
+                        ]
                     }
                 }
             }
