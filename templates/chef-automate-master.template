@@ -10,7 +10,6 @@
                     },
                     "Parameters": [
                         "AvailabilityZones",
-                        "CreatePrivateSubnets",
                         "PublicSubnetCIDR",
                         "RemoteAdminCIDR",
                         "SubnetId",
@@ -48,9 +47,6 @@
                 },
                 "ChefAutomateInstanceType": {
                     "default": "Chef Automate Instance Type"
-                },
-                "CreatePrivateSubnets": {
-                    "default": "Create private subnets"
                 },
                 "IncludeDemoInstances": {
                     "default": "Enable and Launch Demo Instances."
@@ -114,15 +110,6 @@
             "MaxValue": 10,
             "Type": "Number",
             "ConstraintDescription": "Must be a number between 1 and 10."
-        },
-        "CreatePrivateSubnets": {
-            "AllowedValues": [
-                "true",
-                "false"
-            ],
-            "Default": "false",
-            "Description": "Set to true to create private subnets.",
-            "Type": "String"
         },
         "IncludeDemoInstances": {
             "Description": "Set this value to 'true' to include a Chef workstation and demo node. For Chef Automate only, set to 'false'",
@@ -207,9 +194,7 @@
                             }
                         ]
                     },
-                    "CreatePrivateSubnets": {
-                        "Ref": "CreatePrivateSubnets"
-                    },
+                    "CreatePrivateSubnets": "false",
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
