@@ -4,14 +4,6 @@
         "ParameterValue": "cikey"
     },
     {
-        "ParameterKey": "QSS3BucketName",
-        "ParameterValue": "quickstart-reference"
-    },
-    {
-        "ParameterKey": "QSS3KeyPrefix",
-        "ParameterValue": "chef/chef-server/latest/"
-    },
-    {
         "ParameterKey": "RemoteAdminCIDR",
         "ParameterValue": "0.0.0.0/0"
     },

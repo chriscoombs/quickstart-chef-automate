@@ -1,9 +1,32 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Step 3 of 3: Create the Amazon EC2 instances for the Chef Server Quick Start.",
+    "Description": "Step 2 of 2: Create the Amazon EC2 instances for the Chef Automate Quick Start. QS(0015)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "Network Configuration"
+                    },
+                    "Parameters": [
+                        "RemoteAdminCIDR",
+                        "SubnetId",
+                        "VPC",
+                        "VPCCIDR"                     
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Chef Automate Configuration"
+                    },
+                    "Parameters": [
+                        "AdminPassword",
+                        "ChefAutomateInstanceType",
+                        "ChefNodes",
+                        "IncludeDemoInstances",
+                        "KeyPairName"                    
+                    ]
+                },
                 {
                     "Label": {
                         "default": "AWS Quick Start Configuration"
@@ -12,39 +35,17 @@
                         "QSS3BucketName",
                         "QSS3KeyPrefix"
                     ]
-                },
-                {
-                    "Label": {
-                        "default": "Network Configuration"
-                    },
-                    "Parameters": [
-                        "VPC",
-                        "VPCCIDR",
-                        "SubnetId",
-                        "PublicSubnetCIDR",
-                        "RemoteAdminCIDR"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "Chef Server Configuration"
-                    },
-                    "Parameters": [
-                        "KeyPairName",
-                        "ChefAutomateInstanceType",
-                        "IncludeDemoInstances",
-                        "ChefNodes",
-                        "AdminPassword"                    
-                    ]
                 }
-
             ],
             "ParameterLabels": {
+                "AdminPassword": {
+                    "default": "Chef Administrator password."
+                },
                 "ChefAutomateInstanceType": {
                     "default": "Chef Automate Instance Type"
                 },
-                "SubnetId": {
-                    "default": "Public Subnet ID"
+                "IncludeDemoInstances": {
+                    "default": "Enable and Launch Demo Instances."
                 },
                 "QSS3BucketName": {
                     "default": "Quick Start S3 Bucket Name"
@@ -52,17 +53,11 @@
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
                 },
-                "AdminPassword": {
-                    "default": "Chef Administrator password."
-                },
                 "RemoteAccessCIDR": {
                     "default": "Allowed External Access CIDR"
                 },
-                "PublicSubnetCIDR": {
-                    "default": "Enter the CIDR for your Public subnet"
-                },
-                "IncludeDemoInstances": {
-                    "default": "Enable and Launch Demo Instances."
+                "SubnetId": {
+                    "default": "Public Subnet ID"
                 },
                 "VPCCIDR": {
                     "default": "VPC CIDR"
@@ -74,37 +69,10 @@
         }
     },
     "Parameters": {
-        "QSS3BucketName": {
-            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
-            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
-            "Default": "quickstart-reference",
-            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
-            "Type": "String"
-        },
-        "QSS3KeyPrefix": {
-            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
-            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "chef/chef-server/latest/",
-            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Type": "String"
-        },
-        "KeyPairName": {
-            "Description": "Public/private key pair",
-            "Type": "AWS::EC2::KeyPair::KeyName"
-        },
-        "PublicSubnetCIDR": {
-            "Description": "CIDR Block for the Public Subnet",
+        "AdminPassword": {
+            "Description": "Password for the 'chefadmin' account used to sign into the Chef Management Console",
             "Type": "String",
-            "Default": "10.0.0.0/19",
-            "AllowedPattern": "[a-zA-Z0-9]+\\..+"
-        },
-        "SubnetId": {
-            "Description": "VPC Subnet ID for EC2 Instances",
-            "Type": "AWS::EC2::Subnet::Id"
-        },
-        "VPC": {
-            "Description": "VPC Id",
-            "Type": "AWS::EC2::VPC::Id"
+            "NoEcho": "True"
         },
         "ChefAutomateInstanceType": {
             "Default": "t2.xlarge",
@@ -124,16 +92,6 @@
             "Description": "Type of EC2 instance for the Master instances",
             "Type": "String"
         },
-        "RemoteAdminCIDR": {
-            "Description": "CIDR Block or IP for SSH and RDP access",
-            "Type": "String",
-            "AllowedPattern": "[a-zA-Z0-9]+\\..+"
-        },
-        "AdminPassword": {
-            "Description": "Password for the 'chefadmin' account used to sign into the Chef Management Console",
-            "Type": "String",
-            "NoEcho": "True"
-        },
         "ChefNodes": {
             "Description": "Select the number of nodes you want to support.",
             "Default": 1,
@@ -151,11 +109,66 @@
             "Type": "String",
             "Default": "true"
         },
+        "KeyPairName": {
+            "Description": "Public/private key pair",
+            "Type": "AWS::EC2::KeyPair::KeyName"
+        },
+        "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Default": "quickstart-reference",
+            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Type": "String"
+        },
+        "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Default": "chef/automate/latest/",
+            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Type": "String"
+        },
+        "RemoteAdminCIDR": {
+            "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
+            "Description": "CIDR Block or IP for SSH and RDP access",
+            "Type": "String",
+            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$"
+        },
+        "SubnetId": {
+            "Description": "VPC Subnet ID for EC2 Instances",
+            "Type": "AWS::EC2::Subnet::Id"
+        },
+        "VPC": {
+            "Description": "VPC Id",
+            "Type": "AWS::EC2::VPC::Id"
+        },
         "VPCCIDR": {
             "Description": "CIDR Block for the VPC",
             "Type": "String",
             "Default": "10.0.0.0/16",
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
+        }
+    },
+    "Rules": {
+        "CheckSupportedRegions": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Not": [
+                            {
+                                "Fn::Contains": [
+                                    [
+                                        "eu-west-3"
+                                    ],
+                                    {
+                                        "Ref": "AWS::Region"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AssertDescription": "Chef does not currently support the Paris region"
+                }
+             ]
         }
     },
     "Conditions": {
@@ -208,6 +221,12 @@
                 "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-2013f142"
             },
+            "ca-central-1": {
+                "CHEF": "ami-0a00b86e",
+                "US1404HVM": "ami-338b3057",
+                "RHEL74HVM": "ami-c1cb4ea5",
+                "WS2012R2": "ami-f3ed6897"
+            },
             "eu-central-1": {
                 "CHEF": "ami-a2e152cd",
                 "US1404HVM": "ami-f6dc6699",
@@ -220,6 +239,12 @@
                 "RHEL74HVM": "ami-bb9a6bc2",
                 "WS2012R2": "ami-1ecc1e67"
             },
+            "eu-west-2": {
+                "CHEF": "ami-fb9c809f",
+                "US1404HVM": "ami-3fc8d75b",
+                "RHEL74HVM": "ami-c1d2caa5",
+                "WS2012R2": "ami-29e0f84d"
+            },
             "sa-east-1": {
                 "CHEF": "ami-fda7db91",
                 "US1404HVM": "ami-ab6e16c7",
@@ -231,6 +256,12 @@
                 "US1404HVM": "ami-90fd5dea",
                 "RHEL74HVM": "ami-c998b6b2",
                 "WS2012R2": "ami-f6529b8c"
+            },
+            "us-east-2": {
+                "CHEF": "ami-4db79828",
+                "US1404HVM": "ami-f0f8d695",
+                "RHEL74HVM": "ami-0b1e356e",
+                "WS2012R2": "ami-fccce799"
             },
             "us-west-1": {
                 "CHEF": "ami-876656e7",
@@ -448,10 +479,10 @@
                 ]
             }
         },
-        "ChefServerSecurityGroup": {
+        "ChefAutomateSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupDescription": "Enables SSH and HTTPS access to the Chef Server",
+                "GroupDescription": "Enables SSH and HTTPS access to the Chef Automate",
                 "VpcId": {
                     "Ref": "VPC"
                 },
@@ -588,10 +619,10 @@
                 "AWS::CloudFormation::Interface":{
                    "config": {
                        "files": {
-                         "/tmp/chefserver-bootstrap.sh": {
+                         "/tmp/chefautomate-bootstrap.sh": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefserver-bootstrap.sh",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -647,7 +678,7 @@
                 },
                 "SecurityGroupIds": [
                     {
-                        "Ref": "ChefServerSecurityGroup"
+                        "Ref": "ChefAutomateSecurityGroup"
                     }
                 ],
                 "KeyName": {
@@ -684,9 +715,9 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                { "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefserver-bootstrap.sh /tmp/chefserver-bootstrap.sh\n" },
-                                "chmod 755 /tmp/chefserver-bootstrap.sh\n",
-                                "/tmp/chefserver-bootstrap.sh\n",
+                                { "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh /tmp/chefautomate-bootstrap.sh\n" },
+                                "chmod 755 /tmp/chefautomate-bootstrap.sh\n",
+                                "/tmp/chefautomate-bootstrap.sh\n",
                                 "QSS3BucketName=\"",
                                 {
                                     "Ref": "QSS3BucketName"
@@ -796,7 +827,7 @@
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -813,7 +844,7 @@
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/modules/AWSQuickStart.zip",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [
@@ -870,7 +901,7 @@
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
                             "source": {
                                 "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}microsoft-utilities/scripts/New-LocalAdministrator.ps1",
+                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1",
                                     {
                                         "QSS3Region": {
                                             "Fn::If": [

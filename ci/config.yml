@@ -1,10 +1,12 @@
 global:
-  qsname: quickstart-chef-chefserver
+  qsname: quickstart-chef-automate
   reporting: true
   regions:
+    - ca-central-1
     - us-east-1
     - us-west-1
     - eu-west-1
+    - eu-west-2
     - us-west-2
     - sa-east-1
     - eu-central-1
@@ -14,11 +16,15 @@ global:
     - ap-northeast-2
 
 tests:
-  qs_chefservert1:
-    template_file: Chef-Server-QuickStart.template
-    parameter_input: Chef-Server-QuickStart.json
+  qs_chefautomate1:
+    template_file: chef-automate-master.template
+    parameter_input: chef-automate-master.json
     regions:
+      - ca-central-1
       - us-east-1
       - us-west-1
+      - eu-central-1
       - eu-west-1
+      - eu-west-2
       - us-west-2
+
