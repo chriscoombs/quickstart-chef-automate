@@ -206,6 +206,11 @@
                 "US1404HVM": "ami-7246e61c",
                 "WS2012R2": "ami-5cdc7c32"
             },
+            "ap-south-1": {
+                "CHEF": "ami-1396da7c",
+                "US1404HVM": "ami-46eea129",
+                "WS2012R2": "ami-8291c5ed"
+            },
             "ap-southeast-1": {
                 "CHEF": "ami-c2c2b1a1",
                 "US1404HVM": "ami-1384f76f",
