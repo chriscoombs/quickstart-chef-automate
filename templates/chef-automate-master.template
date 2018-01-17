@@ -114,7 +114,7 @@
                 "false"
             ],
             "Type": "String",
-            "Default": "true"
+            "Default": "false"
         },
         "KeyPairName": {
             "Description": "Public/private key pair",
