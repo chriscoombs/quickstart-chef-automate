@@ -192,77 +192,77 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
-                "CHEF": "public_aio_flexible_2016_09_12_16_32_47-e5be03d6-c6dd-4a77-ae5a-7895d845c720-ami-f8aedeef.3",
+                "CHEFAUTOMATE": "public_automate_2017_11_08_18_55_04-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-ami-666fd21c.4",
                 "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20180110",
                 "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2018.01.12"
             },
             "ap-northeast-1": {
-                "CHEF": "ami-6944910f",
+                "CHEFAUTOMATE": "ami-ac9832ca",
                 "US1404HVM": "ami-816cf4e7",
                 "WS2012R2": "ami-1a7ee47c"
             },
             "ap-northeast-2": {
-                "CHEF": "ami-7cd60c12",
+                "CHEFAUTOMATE": "ami-4e258120",
                 "US1404HVM": "ami-7246e61c",
                 "WS2012R2": "ami-0b4eee65"
             },
             "ap-south-1": {
-                "CHEF": "ami-1396da7c",
+                "CHEFAUTOMATE": "ami-1396da7c",
                 "US1404HVM": "ami-46eea129",
                 "WS2012R2": "ami-c488dfab"
             },
             "ap-southeast-1": {
-                "CHEF": "ami-c2c2b1a1",
+                "CHEFAUTOMATE": "ami-eff9b08c",
                 "US1404HVM": "ami-1384f76f",
                 "WS2012R2": "ami-c83944b4"
             },
             "ap-southeast-2": {
-                "CHEF": "ami-4e4dac2c",
+                "CHEFAUTOMATE": "ami-0658b164",
                 "US1404HVM": "ami-c831ccaa",
                 "WS2012R2": "ami-30a55952"
             },
             "ca-central-1": {
-                "CHEF": "ami-0a00b86e",
+                "CHEFAUTOMATE": "ami-0a00b86e",
                 "US1404HVM": "ami-ccaf2aa8",
                 "WS2012R2": "ami-41ab2e25"
             },
             "eu-central-1": {
-                "CHEF": "ami-a2e152cd",
+                "CHEFAUTOMATE": "ami-6eaf2901",
                 "US1404HVM": "ami-a531a3ca",
                 "WS2012R2": "ami-3204995d"
             },
             "eu-west-1": {
-                "CHEF": "ami-bb9c57c2",
+                "CHEFAUTOMATE": "ami-fba40b82",
                 "US1404HVM": "ami-34f2604d",
                 "WS2012R2": "ami-cc821eb5"
             },
             "eu-west-2": {
-                "CHEF": "ami-fb9c809f",
+                "CHEFAUTOMATE": "ami-fb9c809f",
                 "US1404HVM": "ami-606b7004",
                 "WS2012R2": "ami-9f677cfb"
             },
             "sa-east-1": {
-                "CHEF": "ami-fda7db91",
+                "CHEFAUTOMATE": "ami-09215b65",
                 "US1404HVM": "ami-926527fe",
                 "WS2012R2": "ami-d6c785ba"
             },
             "us-east-1": {
-                "CHEF": "ami-90b241ea",
+                "CHEFAUTOMATE": "ami-49de6033",
                 "US1404HVM": "ami-33e4bc49",
                 "WS2012R2": "ami-013e197b"
             },
             "us-east-2": {
-                "CHEF": "ami-4db79828",
+                "CHEFAUTOMATE": "ami-4db79828",
                 "US1404HVM": "ami-854b61e0",
                 "WS2012R2": "ami-02446e67"
             },
             "us-west-1": {
-                "CHEF": "ami-876656e7",
+                "CHEFAUTOMATE": "ami-f8e6d898",
                 "US1404HVM": "ami-915f5cf1",
                 "WS2012R2": "ami-92fefdf2"
             },
             "us-west-2": {
-                "CHEF": "ami-9acb32e2",
+                "CHEFAUTOMATE": "ami-f618cf8e",
                 "US1404HVM": "ami-b88c3bc0",
                 "WS2012R2": "ami-afe051d7"
             }
@@ -649,7 +649,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        "CHEF"
+                        "CHEFAUTOMATE"
                     ]
                 },
                 "InstanceType": "t2.medium",
