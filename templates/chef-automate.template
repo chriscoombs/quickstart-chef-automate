@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Step 2 of 2: Create the Amazon EC2 instances for the Chef Automate Quick Start. QS(0015)",
+    "Description": "Create the Amazon EC2 instances for the Chef Automate Quick Start. QS(0015)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -12,7 +12,7 @@
                         "RemoteAdminCIDR",
                         "SubnetId",
                         "VPC",
-                        "VPCCIDR"                     
+                        "VPCCIDR"
                     ]
                 },
                 {
@@ -24,7 +24,7 @@
                         "ChefAutomateInstanceType",
                         "ChefNodes",
                         "IncludeDemoInstances",
-                        "KeyPairName"                    
+                        "KeyPairName"
                     ]
                 },
                 {
@@ -168,7 +168,7 @@
                     },
                     "AssertDescription": "Chef does not currently support the Paris region"
                 }
-             ]
+            ]
         }
     },
     "Conditions": {
@@ -192,87 +192,73 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
+                "CHEF": "public_aio_flexible_2016_09_12_16_32_47-e5be03d6-c6dd-4a77-ae5a-7895d845c720-ami-f8aedeef.3",
                 "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20171026",
-                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2017.10.13",
-                "RHEL74HVM": "RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2",
-                "CHEF": "public_aio_flexible_2016_09_12_16_32_47-e5be03d6-c6dd-4a77-ae5a-7895d845c720-ami-f8aedeef.3"
+                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2017.10.13"
             },
             "ap-northeast-1": {
                 "CHEF": "ami-6944910f",
                 "US1404HVM": "ami-425efe24",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-4d34eb2b"
             },
             "ap-northeast-2": {
                 "CHEF": "ami-7cd60c12",
                 "US1404HVM": "ami-99a501f7",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-82fe5bec"
             },
             "ap-southeast-1": {
                 "CHEF": "ami-c2c2b1a1",
                 "US1404HVM": "ami-e3c58580",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-0e13686d"
             },
             "ap-southeast-2": {
                 "CHEF": "ami-4e4dac2c",
                 "US1404HVM": "ami-10dc3372",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-2013f142"
             },
             "ca-central-1": {
                 "CHEF": "ami-0a00b86e",
                 "US1404HVM": "ami-338b3057",
-                "RHEL74HVM": "ami-c1cb4ea5",
                 "WS2012R2": "ami-f3ed6897"
             },
             "eu-central-1": {
                 "CHEF": "ami-a2e152cd",
                 "US1404HVM": "ami-f6dc6699",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-e8843b87"
             },
             "eu-west-1": {
                 "CHEF": "ami-bb9c57c2",
                 "US1404HVM": "ami-3db41044",
-                "RHEL74HVM": "ami-bb9a6bc2",
                 "WS2012R2": "ami-1ecc1e67"
             },
             "eu-west-2": {
                 "CHEF": "ami-fb9c809f",
                 "US1404HVM": "ami-3fc8d75b",
-                "RHEL74HVM": "ami-c1d2caa5",
                 "WS2012R2": "ami-29e0f84d"
             },
             "sa-east-1": {
                 "CHEF": "ami-fda7db91",
                 "US1404HVM": "ami-ab6e16c7",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-5d512f31"
             },
             "us-east-1": {
                 "CHEF": "ami-90b241ea",
                 "US1404HVM": "ami-90fd5dea",
-                "RHEL74HVM": "ami-c998b6b2",
                 "WS2012R2": "ami-f6529b8c"
             },
             "us-east-2": {
                 "CHEF": "ami-4db79828",
                 "US1404HVM": "ami-f0f8d695",
-                "RHEL74HVM": "ami-0b1e356e",
                 "WS2012R2": "ami-fccce799"
             },
             "us-west-1": {
                 "CHEF": "ami-876656e7",
                 "US1404HVM": "ami-a81428c8",
-                "RHEL74HVM": "ami-ccecf5af",
                 "WS2012R2": "ami-955c6ef5"
             },
             "us-west-2": {
                 "CHEF": "ami-9acb32e2",
                 "US1404HVM": "ami-852fe1fd",
-                "RHEL74HVM": "ami-9fa343e7",
                 "WS2012R2": "ami-f318de8b"
             }
         }
@@ -313,7 +299,6 @@
                                 {
                                     "Action": [
                                         "s3:GetObject"
-                                        
                                     ],
                                     "Resource": {
                                         "Fn::Sub": [
@@ -386,25 +371,34 @@
                     ]
                 },
                 "InstanceType": "t2.medium",
-                "MinCount": { "Ref": "ChefNodes"},
-                "MaxCount": { "Ref": "ChefNodes"},
-                "SecurityGroupIds": [{
-                    "Fn::GetAtt" : [ "ChefNodeSecurityGroup", "GroupId" ]
-                }],
+                "MinCount": {
+                    "Ref": "ChefNodes"
+                },
+                "MaxCount": {
+                    "Ref": "ChefNodes"
+                },
+                "SecurityGroupIds": [
+                    {
+                        "Fn::GetAtt": [
+                            "ChefNodeSecurityGroup",
+                            "GroupId"
+                        ]
+                    }
+                ],
                 "SubnetId": {
                     "Ref": "SubnetId"
                 },
                 "TagSpecifications": [
                     {
-                      "ResourceType": "instance" ,
-                      "Tags": [
-                        {
-                          "Key": "Name",
-                          "Value": "Node"
-                        }
-                      ]
+                        "ResourceType": "instance",
+                        "Tags": [
+                            {
+                                "Key": "Name",
+                                "Value": "Node"
+                            }
+                        ]
                     }
-                  ],
+                ],
                 "KeyName": {
                     "Ref": "KeyPairName"
                 }
@@ -565,7 +559,7 @@
             }
         },
         "ChefAutomateCloudWatchAlarmInstanceRecovery": {
-          "DependsOn": "ChefAutomate",
+            "DependsOn": "ChefAutomate",
             "Type": "AWS::CloudWatch::Alarm",
             "Properties": {
                 "AlarmDescription": "Trigger a recovery when instance status check fails for 10 consecutive minutes.",
@@ -584,7 +578,7 @@
                                 "arn:aws:automate:",
                                 {
                                     "Ref": "AWS::Region"
-                               },
+                                },
                                 ":ec2:recover"
                             ]
                         ]
@@ -602,7 +596,7 @@
         },
         "ChefAutomate": {
             "Type": "AWS::EC2::Instance",
-            "Metadata":{
+            "Metadata": {
                 "AWS::CloudFormation::Authentication": {
                     "S3AccessCreds": {
                         "type": "S3",
@@ -616,32 +610,31 @@
                         ]
                     }
                 },
-                "AWS::CloudFormation::Interface":{
-                   "config": {
-                       "files": {
-                         "/tmp/chefautomate-bootstrap.sh": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                "AWS::CloudFormation::Interface": {
+                    "config": {
+                        "files": {
+                            "/tmp/chefautomate-bootstrap.sh": {
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "mode": "000550",
-                            "owner": "root",
-                            "group": "root",
-                            "authentication": "S3AccessCreds"
-                         }                          
-                       }
-                   }
-               
+                                    ]
+                                },
+                                "mode": "000550",
+                                "owner": "root",
+                                "group": "root",
+                                "authentication": "S3AccessCreds"
+                            }
+                        }
+                    }
                 }
             },
             "Properties": {
@@ -715,7 +708,9 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                { "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh /tmp/chefautomate-bootstrap.sh\n" },
+                                {
+                                    "Fn::Sub": "aws s3 cp s3://${QSS3BucketName}/${QSS3KeyPrefix}scripts/chefautomate-bootstrap.sh /tmp/chefautomate-bootstrap.sh\n"
+                                },
                                 "chmod 755 /tmp/chefautomate-bootstrap.sh\n",
                                 "/tmp/chefautomate-bootstrap.sh\n",
                                 "QSS3BucketName=\"",
@@ -825,38 +820,38 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "authentication": "S3AccessCreds"
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "authentication": "S3AccessCreds"
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\chefdk-0.9.0-1-x86.msi": {
                                 "source": "https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/i386/chefdk-0.9.0-1-x86.msi"
@@ -865,21 +860,21 @@
                                 "source": "https://github.com/git-for-windows/git/releases/download/v2.6.2.windows.1/Git-2.6.2-64-bit.exe"
                             },
                             "c:\\cfn\\scripts\\git.inf": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/git.inf",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/git.inf",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "authentication": "S3AccessCreds"
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\default.rb": {
                                 "source": {
@@ -899,38 +894,38 @@
                                 "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "authentication": "S3AccessCreds"
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\index.html": {
-                            "source": {
-                                "Fn::Sub": [
-                                    "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/index.html",
-                                    {
-                                        "QSS3Region": {
-                                            "Fn::If": [
-                                                "GovCloudCondition",
-                                                "s3-us-gov-west-1",
-                                                "s3"
-                                            ]
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/index.html",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "authentication": "S3AccessCreds"
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3134758-x64.msu": {
                                 "source": "https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win8.1AndW2K12R2-KB3134758-x64.msu"

@@ -1,18 +1,34 @@
 [
     {
-        "ParameterKey": "KeyPairName",
-        "ParameterValue": "cikey"
-    },
-    {
-        "ParameterKey": "RemoteAdminCIDR",
-        "ParameterValue": "0.0.0.0/0"
-    },
-    {
-        "ParameterKey": "RemoteAdminCIDR",
-        "ParameterValue": "R00tshell9"
-    },
-    {
         "ParameterKey": "AdminPassword",
         "ParameterValue": "$[alfred_genpass_12]"
+    },
+    {
+        "ParameterKey": "AvailabilityZones",
+        "ParameterValue": "$[alfred_getaz_2]"
+    },
+    {
+        "ParameterKey": "ChefNodes",
+        "ParameterValue": "2"
+    },
+    {
+        "ParameterKey": "IncludeDemoInstances",
+        "ParameterValue": "true"
+    },
+    {
+        "ParameterKey": "KeyPairName",
+        "ParameterValue": "$[alfred_getkeypair]"
+    },
+    {
+        "ParameterKey": "PublicSubnetCIDR",
+        "ParameterValue": "10.0.128.0/20"
+    },
+    {
+        "ParameterKey": "RemoteAdminCIDR",
+        "ParameterValue": "10.0.0.0/16"
+    },
+    {
+        "ParameterKey": "VPCCIDR",
+        "ParameterValue": "10.0.0.0/16"
     }
 ]

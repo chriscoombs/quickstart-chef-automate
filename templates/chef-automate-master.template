@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Step 1 of 2: This template deploys the AWS Chef Automate Quick Start. ***NOTE*** You must subscribe to the Chef Automate AMI from the AWS Marketplace before you launch this template. See the deployment guide at http://aws.amazon.com/quickstart for details. This template creates Amazon EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
+    "Description": "This template deploys the AWS Chef Automate Quick Start. ***NOTE*** You must subscribe to the Chef Automate AMI from the AWS Marketplace before you launch this template. See the deployment guide at http://aws.amazon.com/quickstart for details. This template creates Amazon EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -12,8 +12,7 @@
                         "AvailabilityZones",
                         "PublicSubnetCIDR",
                         "RemoteAdminCIDR",
-                        "SubnetId",
-                        "VPCCIDR"                     
+                        "VPCCIDR"
                     ]
                 },
                 {
@@ -25,7 +24,7 @@
                         "ChefAutomateInstanceType",
                         "ChefNodes",
                         "IncludeDemoInstances",
-                        "KeyPairName"                    
+                        "KeyPairName"
                     ]
                 },
                 {
@@ -51,9 +50,6 @@
                 "IncludeDemoInstances": {
                     "default": "Enable and Launch Demo Instances."
                 },
-                "SubnetId": {
-                    "default": "Public Subnet ID"
-                },
                 "QSS3BucketName": {
                     "default": "Quick Start S3 Bucket Name"
                 },
@@ -64,7 +60,7 @@
                     "default": "Allowed External Access CIDR"
                 },
                 "PublicSubnetCIDR": {
-                    "default": "Enter the CIDR for your Public subnet"
+                    "default": "Public Subnet CIDR"
                 },
                 "VPCCIDR": {
                     "default": "VPC CIDR"
@@ -178,7 +174,7 @@
                     },
                     "AssertDescription": "Chef does not currently support the Paris region"
                 }
-             ]
+            ]
         }
     },
     "Conditions": {
@@ -196,18 +192,18 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                  "Fn::Sub": [
-                      "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template",
-                      {
-                          "QSS3Region": {
-                              "Fn::If": [
-                                  "GovCloudCondition",
-                                  "s3-us-gov-west-1",
-                                  "s3"
-                              ]
-                          }
-                      }
-                  ]
+                    "Fn::Sub": [
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template",
+                        {
+                            "QSS3Region": {
+                                "Fn::If": [
+                                    "GovCloudCondition",
+                                    "s3-us-gov-west-1",
+                                    "s3"
+                                ]
+                            }
+                        }
+                    ]
                 },
                 "Parameters": {
                     "AvailabilityZones": {
