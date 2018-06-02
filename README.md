@@ -10,7 +10,7 @@ The deployment is automated by an AWS CloudFormation template. The Quick Start a
 ![Quick Start architecture for Chef Automate on AWS](https://d0.awsstatic.com/partner-network/QuickStart/datasheets/chef-automate-architecture-on-aws.png)
 
 For architectural details, best practices, step-by-step instructions, and customization options, see the 
-[deployment guide](http://docs.aws.amazon.com/quickstart/latest/chef-server/welcome.html).
+[deployment guide](https://fwd.aws/yVDGj).
 
 To post feedback, submit feature ideas, or report bugs, use the **Issues** section of this GitHub repo.
 If you'd like to submit code for this Quick Start, please review the [AWS Quick Start Contributor's Kit](https://aws-quickstart.github.io/). 
