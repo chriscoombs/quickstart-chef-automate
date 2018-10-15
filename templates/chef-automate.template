@@ -193,77 +193,77 @@
         "AWSAMIRegionMap": {
             "AMI": {
                 "CHEFAUTOMATE": "public_automate_2018_07_16_19_28_49-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-ami-ca0e30b5.4",
-                "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20180913",
+                "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20181004",
                 "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2018.09.15"
             },
             "ap-northeast-1": {
                 "CHEFAUTOMATE": "ami-f674021b",
-                "US1404HVM": "ami-0c6eca07cd522225c",
+                "US1404HVM": "ami-02457e8318b769bc9",
                 "WS2012R2": "ami-0f94c740726599c3a"
             },
             "ap-northeast-2": {
                 "CHEFAUTOMATE": "ami-e342f58d",
-                "US1404HVM": "ami-09cbb8608e95b4e42",
+                "US1404HVM": "ami-0fadc89f664ab149b",
                 "WS2012R2": "ami-0f033ac3427fcdad0"
             },
             "ap-south-1": {
                 "CHEFAUTOMATE": "ami-f7ac9e98",
-                "US1404HVM": "ami-08389ff9434fcbda7",
+                "US1404HVM": "ami-0f80ea73dda174145",
                 "WS2012R2": "ami-0d5f824867e8aeaf6"
             },
             "ap-southeast-1": {
                 "CHEFAUTOMATE": "ami-e33e7f09",
-                "US1404HVM": "ami-039950f07c4a0d878",
+                "US1404HVM": "ami-00c278cd41cca4cb7",
                 "WS2012R2": "ami-0f42104b50a572747"
             },
             "ap-southeast-2": {
                 "CHEFAUTOMATE": "ami-cd46e0af",
-                "US1404HVM": "ami-00cc4908ffe2edda3",
+                "US1404HVM": "ami-08209fe584e4bec7a",
                 "WS2012R2": "ami-06f2dbd8cdf99fd40"
             },
             "ca-central-1": {
                 "CHEFAUTOMATE": "ami-74b13c10",
-                "US1404HVM": "ami-054004889e7d329a5",
+                "US1404HVM": "ami-0ad39a88fdf5d1178",
                 "WS2012R2": "ami-0bc1f82c15f6cb011"
             },
             "eu-central-1": {
                 "CHEFAUTOMATE": "ami-6f898b84",
-                "US1404HVM": "ami-0405a63f383fddd6b",
+                "US1404HVM": "ami-034bea563d2753cad",
                 "WS2012R2": "ami-09f85c4c3e4a1ca3b"
             },
             "eu-west-1": {
                 "CHEFAUTOMATE": "ami-bf6c8952",
-                "US1404HVM": "ami-0ab7944c6328200be",
+                "US1404HVM": "ami-092913012c0a660b8",
                 "WS2012R2": "ami-019526e560b1c9df4"
             },
             "eu-west-2": {
                 "CHEFAUTOMATE": "ami-fa31db9d",
-                "US1404HVM": "ami-06dcf6f1d32fee1f5",
+                "US1404HVM": "ami-0defae105c295e014",
                 "WS2012R2": "ami-068ee8cde1f60ca7f"
             },
             "sa-east-1": {
                 "CHEFAUTOMATE": "ami-9fd9f8f3",
-                "US1404HVM": "ami-0f1253070285f5e5d",
+                "US1404HVM": "ami-00c35fc18aa8859ae",
                 "WS2012R2": "ami-04fddd42220f1829a"
             },
             "us-east-1": {
                 "CHEFAUTOMATE": "ami-db4e46a4",
-                "US1404HVM": "ami-06b5810be11add0e2",
+                "US1404HVM": "ami-08c9f7a0ed0bfa925",
                 "WS2012R2": "ami-04b06bdb58cae787d"
             },
             "us-east-2": {
                 "CHEFAUTOMATE": "ami-10d0ea75",
-                "US1404HVM": "ami-08034366c7d14bda9",
+                "US1404HVM": "ami-0ba853398958b4863",
                 "WS2012R2": "ami-08c59800a21429561"
             },
             "us-west-1": {
                 "CHEFAUTOMATE": "ami-cbbd51a8",
-                "US1404HVM": "ami-00048435fed26a8d1",
+                "US1404HVM": "ami-06fbabb10cec8232b",
                 "WS2012R2": "ami-08f6003bf4d50fe60"
             },
             "us-west-2": {
                 "CHEFAUTOMATE": "ami-45df873d",
-                "US1404HVM": "ami-09bfeda7337019518",
+                "US1404HVM": "ami-085cab0c4dc13cb52",
                 "WS2012R2": "ami-0d1a1bbc1331e97f7"
             }
         }
