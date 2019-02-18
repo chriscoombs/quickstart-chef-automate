@@ -194,77 +194,77 @@
             "AMI": {
                 "CHEFAUTOMATE": "public_automate_2018_07_16_19_28_49-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-ami-ca0e30b5.4",
                 "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190122.1",
-                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2018.12.13"
+                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2019.02.13"
             },
             "ap-northeast-1": {
                 "CHEFAUTOMATE": "ami-f674021b",
                 "US1404HVM": "ami-09a19edcb709d7a77",
-                "WS2012R2": "ami-01a36b3a16228aabc"
+                "WS2012R2": "ami-0d99aa7f0403a9ba4"
             },
             "ap-northeast-2": {
                 "CHEFAUTOMATE": "ami-e342f58d",
                 "US1404HVM": "ami-0398ca19c23e260d9",
-                "WS2012R2": "ami-028139f205d2daa74"
+                "WS2012R2": "ami-0163c75ba997507aa"
             },
             "ap-south-1": {
                 "CHEFAUTOMATE": "ami-f7ac9e98",
                 "US1404HVM": "ami-0fd6101258e0ebba7",
-                "WS2012R2": "ami-0fa27628302568cf8"
+                "WS2012R2": "ami-0437fea2a5ba5aacd"
             },
             "ap-southeast-1": {
                 "CHEFAUTOMATE": "ami-e33e7f09",
                 "US1404HVM": "ami-0c3763fc97bb117a7",
-                "WS2012R2": "ami-0634a2a4e5f335566"
+                "WS2012R2": "ami-00230cfcbc0180362"
             },
             "ap-southeast-2": {
                 "CHEFAUTOMATE": "ami-cd46e0af",
                 "US1404HVM": "ami-0db7df036ebf22fae",
-                "WS2012R2": "ami-0af54fcc300d51d81"
+                "WS2012R2": "ami-0f66d840816e8a35f"
             },
             "ca-central-1": {
                 "CHEFAUTOMATE": "ami-74b13c10",
                 "US1404HVM": "ami-0992b0b9c07b0eb4d",
-                "WS2012R2": "ami-0a828787cebefec3a"
+                "WS2012R2": "ami-051f75c651d856381"
             },
             "eu-central-1": {
                 "CHEFAUTOMATE": "ami-6f898b84",
                 "US1404HVM": "ami-05abe2b78a8130c27",
-                "WS2012R2": "ami-0a6b3fad1e65fbba5"
+                "WS2012R2": "ami-0ece2db131cd3c16a"
             },
             "eu-west-1": {
                 "CHEFAUTOMATE": "ami-bf6c8952",
                 "US1404HVM": "ami-0f23faa82d114fc34",
-                "WS2012R2": "ami-05697bc3b1b84a9a6"
+                "WS2012R2": "ami-009af7c43be38087d"
             },
             "eu-west-2": {
                 "CHEFAUTOMATE": "ami-fa31db9d",
                 "US1404HVM": "ami-0c967c70f8d9a12ca",
-                "WS2012R2": "ami-041f490cbeaf309e1"
+                "WS2012R2": "ami-025fc1fa28fdf1a87"
             },
             "sa-east-1": {
                 "CHEFAUTOMATE": "ami-9fd9f8f3",
                 "US1404HVM": "ami-06d69f6c430635efe",
-                "WS2012R2": "ami-0203e28b0bd45659f"
+                "WS2012R2": "ami-0f7eee4d47377680e"
             },
             "us-east-1": {
                 "CHEFAUTOMATE": "ami-db4e46a4",
                 "US1404HVM": "ami-08b8af1c94b41235d",
-                "WS2012R2": "ami-02cb4450ba80eb057"
+                "WS2012R2": "ami-066663db63b3aa675"
             },
             "us-east-2": {
                 "CHEFAUTOMATE": "ami-10d0ea75",
                 "US1404HVM": "ami-037d9ee5685d75d4d",
-                "WS2012R2": "ami-0335db37835305b27"
+                "WS2012R2": "ami-00890851afd74dda3"
             },
             "us-west-1": {
                 "CHEFAUTOMATE": "ami-cbbd51a8",
                 "US1404HVM": "ami-0a4acfd7b7b3c7b35",
-                "WS2012R2": "ami-0b6ac87fe08b48203"
+                "WS2012R2": "ami-08462bc4d6a8eb5c1"
             },
             "us-west-2": {
                 "CHEFAUTOMATE": "ami-45df873d",
                 "US1404HVM": "ami-0871409b5c1c6b128",
-                "WS2012R2": "ami-01d5bff29ab3fb41e"
+                "WS2012R2": "ami-07c77fe35092981e9"
             }
         }
     },
