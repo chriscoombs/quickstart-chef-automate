@@ -53,17 +53,11 @@
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
                 },
-                "RemoteAccessCIDR": {
-                    "default": "Allowed External Access CIDR"
-                },
                 "SubnetId": {
                     "default": "Public Subnet ID"
                 },
                 "VPCCIDR": {
                     "default": "VPC CIDR"
-                },
-                "VPCID": {
-                    "default": "VPC ID"
                 }
             }
         }
@@ -425,7 +419,7 @@
                         "Fn::Sub": "var response = require('cfn-response');\nvar AWS = require('aws-sdk');\nexports.handler = function(event, context) {\n  var physicalId = event.PhysicalResourceId || 'none';\n  function success(data) {\n    return response.send(event, context, response.SUCCESS, data, physicalId);\n  }\n  function failed(e) {\n    return response.send(event, context, response.FAILED, e, physicalId);\n  }\n  var ec2 = new AWS.EC2();\n  var instances;\n  if (event.RequestType == 'Create') {\n    var launchParams = event.ResourceProperties;\n    delete launchParams.ServiceToken;\n    ec2.runInstances(launchParams).promise().then((data)=> {\n      instances = data.Instances.map((data)=> data.InstanceId);\n      physicalId = instances.join(':');\n      return ec2.waitFor('instanceRunning', {InstanceIds: instances}).promise();\n    }).then((data)=> success({Instances: instances})\n    ).catch((e)=> failed(e));\n  } else if (event.RequestType == 'Delete') {\n    if (physicalId == 'none') {return success({});}\n    var deleteParams = {InstanceIds: physicalId.split(':')};\n    ec2.terminateInstances(deleteParams).promise().then((data)=>\n      ec2.waitFor('instanceTerminated', deleteParams).promise()\n    ).then((data)=>success({})\n    ).catch((e)=>failed(e));\n  } else {\n    return failed({Error: \"In-place updates not supported.\"});\n  }\n};\n"
                     }
                 },
-                "Runtime": "nodejs4.3",
+                "Runtime": "nodejs8.10",
                 "Timeout": 300
             }
         },
@@ -488,22 +482,22 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": "0.0.0.0/0"
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "443",
-                        "ToPort": "443",
+                        "FromPort": 443,
+                        "ToPort": 443,
                         "CidrIp": "0.0.0.0/0"
                     }
                 ]
@@ -520,8 +514,8 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "3389",
-                        "ToPort": "3389",
+                        "FromPort": 3389,
+                        "ToPort": 3389,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
@@ -540,41 +534,40 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": "0.0.0.0/0"
                     }
                 ]
             }
         },
         "ChefAutomateCloudWatchAlarmInstanceRecovery": {
-            "DependsOn": "ChefAutomate",
             "Type": "AWS::CloudWatch::Alarm",
             "Properties": {
                 "AlarmDescription": "Trigger a recovery when instance status check fails for 10 consecutive minutes.",
                 "Namespace": "AWS/EC2",
                 "MetricName": "StatusCheckFailed_System",
                 "Statistic": "Minimum",
-                "Period": "60",
-                "EvaluationPeriods": "10",
+                "Period": 60,
+                "EvaluationPeriods": 10,
                 "ComparisonOperator": "GreaterThanThreshold",
-                "Threshold": "0",
+                "Threshold": 0.0,
                 "AlarmActions": [
                     {
                         "Fn::Join": [
@@ -666,7 +659,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
@@ -1050,7 +1043,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
