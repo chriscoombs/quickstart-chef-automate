@@ -53,17 +53,11 @@
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
                 },
-                "RemoteAccessCIDR": {
-                    "default": "Allowed External Access CIDR"
-                },
                 "SubnetId": {
                     "default": "Public Subnet ID"
                 },
                 "VPCCIDR": {
                     "default": "VPC CIDR"
-                },
-                "VPCID": {
-                    "default": "VPC ID"
                 }
             }
         }
@@ -192,79 +186,79 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
-                "CHEFAUTOMATE": "public_automate_2018_04_05_02_55_26-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-ami-da05a9a7.4",
-                "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20180703",
-                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2018.06.13"
+                "CHEFAUTOMATE": "public_automate_2018_07_16_19_28_49-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-ami-ca0e30b5.4",
+                "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190321",
+                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2019.03.13"
             },
             "ap-northeast-1": {
-                "CHEFAUTOMATE": "ami-e4faec98",
-                "US1404HVM": "ami-98cfaa75",
-                "WS2012R2": "ami-4e0cc331"
+                "CHEFAUTOMATE": "ami-f674021b",
+                "US1404HVM": "ami-010170fd6370d7fc5",
+                "WS2012R2": "ami-045a5d71b00d066b0"
             },
             "ap-northeast-2": {
-                "CHEFAUTOMATE": "ami-40228d2e",
-                "US1404HVM": "ami-71cc781f",
-                "WS2012R2": "ami-2968c247"
+                "CHEFAUTOMATE": "ami-e342f58d",
+                "US1404HVM": "ami-0ec4e24b94f2d3151",
+                "WS2012R2": "ami-00f93ebe6e0f44b5e"
             },
             "ap-south-1": {
-                "CHEFAUTOMATE": "ami-8ed9fce1",
-                "US1404HVM": "ami-f5e0d79a",
-                "WS2012R2": "ami-e795bd88"
+                "CHEFAUTOMATE": "ami-f7ac9e98",
+                "US1404HVM": "ami-0f13613498660dbd5",
+                "WS2012R2": "ami-0b64cdef39da126a0"
             },
             "ap-southeast-1": {
-                "CHEFAUTOMATE": "ami-b0f3d6cc",
-                "US1404HVM": "ami-1c106cf6",
-                "WS2012R2": "ami-de2a2da2"
+                "CHEFAUTOMATE": "ami-e33e7f09",
+                "US1404HVM": "ami-02cf8f74c8231f273",
+                "WS2012R2": "ami-055d5146cfa1eea18"
             },
             "ap-southeast-2": {
-                "CHEFAUTOMATE": "ami-5219d730",
-                "US1404HVM": "ami-f75a8195",
-                "WS2012R2": "ami-75f32c17"
+                "CHEFAUTOMATE": "ami-cd46e0af",
+                "US1404HVM": "ami-0d21bd76bdbb39f53",
+                "WS2012R2": "ami-0c3e23a890cc1b84b"
             },
             "ca-central-1": {
-                "CHEFAUTOMATE": "ami-8f7afceb",
-                "US1404HVM": "ami-2c73f148",
-                "WS2012R2": "ami-800685e4"
+                "CHEFAUTOMATE": "ami-74b13c10",
+                "US1404HVM": "ami-0ad7549d93c4ddd04",
+                "WS2012R2": "ami-0389dfe354ca7f037"
             },
             "eu-central-1": {
-                "CHEFAUTOMATE": "ami-ce590725",
-                "US1404HVM": "ami-05d9e2ee",
-                "WS2012R2": "ami-e8093a03"
+                "CHEFAUTOMATE": "ami-6f898b84",
+                "US1404HVM": "ami-0296395f39316322f",
+                "WS2012R2": "ami-01f9f86ba9db42573"
             },
             "eu-west-1": {
-                "CHEFAUTOMATE": "ami-6cf9a715",
-                "US1404HVM": "ami-06e2f6ec",
-                "WS2012R2": "ami-3e7a7647"
+                "CHEFAUTOMATE": "ami-bf6c8952",
+                "US1404HVM": "ami-05114f217cff0c839",
+                "WS2012R2": "ami-03d95a1f128ac4d9b"
             },
             "eu-west-2": {
-                "CHEFAUTOMATE": "ami-4b6f8e2c",
-                "US1404HVM": "ami-879078e0",
-                "WS2012R2": "ami-629a7405"
+                "CHEFAUTOMATE": "ami-fa31db9d",
+                "US1404HVM": "ami-0f451ba65ae4d36ad",
+                "WS2012R2": "ami-03a5f1e86a0e52868"
             },
             "sa-east-1": {
-                "CHEFAUTOMATE": "ami-3b98ce57",
-                "US1404HVM": "ami-dff5d1b3",
-                "WS2012R2": "ami-5c6e3530"
+                "CHEFAUTOMATE": "ami-9fd9f8f3",
+                "US1404HVM": "ami-0515f0e6c3202fe90",
+                "WS2012R2": "ami-022bfe5384cf6fa50"
             },
             "us-east-1": {
-                "CHEFAUTOMATE": "ami-92309fef",
-                "US1404HVM": "ami-456b493a",
-                "WS2012R2": "ami-b8f3b5c7"
+                "CHEFAUTOMATE": "ami-db4e46a4",
+                "US1404HVM": "ami-0d859172c8670bbcd",
+                "WS2012R2": "ami-0ad4ef84bc9427b85"
             },
             "us-east-2": {
-                "CHEFAUTOMATE": "ami-902717f5",
-                "US1404HVM": "ami-31c9f154",
-                "WS2012R2": "ami-da003ebf"
+                "CHEFAUTOMATE": "ami-10d0ea75",
+                "US1404HVM": "ami-0db87c33fa1a58ec8",
+                "WS2012R2": "ami-0a95e6864096336b1"
             },
             "us-west-1": {
-                "CHEFAUTOMATE": "ami-353b2b55",
-                "US1404HVM": "ami-d58868b6",
-                "WS2012R2": "ami-832acee0"
+                "CHEFAUTOMATE": "ami-cbbd51a8",
+                "US1404HVM": "ami-0a219c4755cf23cc3",
+                "WS2012R2": "ami-03600d8a40583354a"
             },
             "us-west-2": {
-                "CHEFAUTOMATE": "ami-c0bbdcb8",
-                "US1404HVM": "ami-a3ebbfdb",
-                "WS2012R2": "ami-aeffbcd6"
+                "CHEFAUTOMATE": "ami-45df873d",
+                "US1404HVM": "ami-0102c9c88bbf1bc7d",
+                "WS2012R2": "ami-02022815fa941f1ea"
             }
         }
     },
@@ -425,7 +419,7 @@
                         "Fn::Sub": "var response = require('cfn-response');\nvar AWS = require('aws-sdk');\nexports.handler = function(event, context) {\n  var physicalId = event.PhysicalResourceId || 'none';\n  function success(data) {\n    return response.send(event, context, response.SUCCESS, data, physicalId);\n  }\n  function failed(e) {\n    return response.send(event, context, response.FAILED, e, physicalId);\n  }\n  var ec2 = new AWS.EC2();\n  var instances;\n  if (event.RequestType == 'Create') {\n    var launchParams = event.ResourceProperties;\n    delete launchParams.ServiceToken;\n    ec2.runInstances(launchParams).promise().then((data)=> {\n      instances = data.Instances.map((data)=> data.InstanceId);\n      physicalId = instances.join(':');\n      return ec2.waitFor('instanceRunning', {InstanceIds: instances}).promise();\n    }).then((data)=> success({Instances: instances})\n    ).catch((e)=> failed(e));\n  } else if (event.RequestType == 'Delete') {\n    if (physicalId == 'none') {return success({});}\n    var deleteParams = {InstanceIds: physicalId.split(':')};\n    ec2.terminateInstances(deleteParams).promise().then((data)=>\n      ec2.waitFor('instanceTerminated', deleteParams).promise()\n    ).then((data)=>success({})\n    ).catch((e)=>failed(e));\n  } else {\n    return failed({Error: \"In-place updates not supported.\"});\n  }\n};\n"
                     }
                 },
-                "Runtime": "nodejs4.3",
+                "Runtime": "nodejs8.10",
                 "Timeout": 300
             }
         },
@@ -488,22 +482,22 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": "0.0.0.0/0"
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "443",
-                        "ToPort": "443",
+                        "FromPort": 443,
+                        "ToPort": 443,
                         "CidrIp": "0.0.0.0/0"
                     }
                 ]
@@ -520,8 +514,8 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "3389",
-                        "ToPort": "3389",
+                        "FromPort": 3389,
+                        "ToPort": 3389,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
@@ -540,41 +534,40 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": "0.0.0.0/0"
                     }
                 ]
             }
         },
         "ChefAutomateCloudWatchAlarmInstanceRecovery": {
-            "DependsOn": "ChefAutomate",
             "Type": "AWS::CloudWatch::Alarm",
             "Properties": {
                 "AlarmDescription": "Trigger a recovery when instance status check fails for 10 consecutive minutes.",
                 "Namespace": "AWS/EC2",
                 "MetricName": "StatusCheckFailed_System",
                 "Statistic": "Minimum",
-                "Period": "60",
-                "EvaluationPeriods": "10",
+                "Period": 60,
+                "EvaluationPeriods": 10,
                 "ComparisonOperator": "GreaterThanThreshold",
-                "Threshold": "0",
+                "Threshold": 0.0,
                 "AlarmActions": [
                     {
                         "Fn::Join": [
@@ -666,7 +659,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
@@ -1050,7 +1043,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
