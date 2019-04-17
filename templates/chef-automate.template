@@ -2,6 +2,15 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Create the Amazon EC2 instances for the Chef Automate Quick Start. QS(0015)",
     "Metadata": {
+        "AWSAMIRegionMap":{
+            "Filters":{
+                "CHEFAUTOMATE":{
+                    "name":"public_automate_*-f29f8c30-b390-4c14-92f6-e2f4fe7bc4c1-*",
+                    "owner-alias":"aws-marketplace",
+                    "product-code.type":"marketplace"
+                }
+            }
+        },
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
                 {
