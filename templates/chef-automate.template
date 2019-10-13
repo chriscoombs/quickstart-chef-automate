@@ -262,7 +262,7 @@
             "us-west-1": {
                 "CHEFAUTOMATE": "ami-cbbd51a8",
                 "US1404HVM": "ami-026e9e583bf07479b",
-                "WS2012R2": "ami-05c71b3ca4af2fbee"
+                "WS2012R2": "ami-05cd4c9c42e255074"
             },
             "us-west-2": {
                 "CHEFAUTOMATE": "ami-45df873d",
